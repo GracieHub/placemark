@@ -1,4 +1,5 @@
 import { v4 } from "uuid";
+import { surfspotMemStore } from "./surfspot-mem-store.js";
 
 let collections = [];
 
@@ -14,7 +15,13 @@ export const collectionMemStore = {
   },
 
   async getCollectionById(id) {
-    return collections.find((collection) => collection._id === id);
+    const list = collections.find((collection) => collection._id === id);
+    list.surfspots = await surfspotMemStore.getSurfspotsByCollectionId(list._id);
+    return list;  
+  },
+
+  async getUserCollections(userid) {
+    return collections.filter((collection) => collection.userid === userid);
   },
 
   async deleteCollectionById(id) {
