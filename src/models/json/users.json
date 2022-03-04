@@ -1,0 +1,11 @@
+{
+  "users": [
+    {
+      "firstName": "Homer",
+      "lastName": "Simpson",
+      "email": "homer@simpson.com",
+      "password": "secret",
+      "_id": "1b195b7b-c9b7-4d77-b727-2f6808c5f2e0"
+    }
+  ]
+}
