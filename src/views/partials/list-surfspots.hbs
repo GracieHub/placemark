@@ -1,0 +1,30 @@
+<table class="table is-fullwidth">
+  <thead>
+    <tr>
+      <th>Name of Surf Spot</th>
+      <th>Location</th>
+      <th>Type Of Wave</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each collection.surfSpots}}
+      <tr>
+        <td>
+          {{name}}
+        </td>
+        <td>
+          {{location}}
+        </td>
+        <td>
+          {{typeOfWave}}
+        </td>
+        <td>
+          <a href="/collection/{{../collection._id}}/deletesurfspot/{{_id}}" class="ui icon button">
+            <i class="fas fa-trash"></i>
+          </a>
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
