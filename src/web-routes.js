@@ -2,6 +2,7 @@ import { aboutController } from "./controllers/about-controller.js";
 import { accountsController } from "./controllers/accounts-controller.js";
 import { dashboardController } from "./controllers/dashboard-controller.js";
 import { collectionController } from "./controllers/collection-controller.js";
+import { surfspotController } from "./controllers/surfspot-controller.js";
 
 export const webRoutes = [
   { method: "GET", path: "/", config: accountsController.index },
@@ -20,5 +21,10 @@ export const webRoutes = [
   { method: "GET", path: "/collection/{id}", config: collectionController.index },
   { method: "POST", path: "/collection/{id}/addsurfspot", config: collectionController.addSurfspot },
   { method: "GET", path: "/collection/{id}/deletesurfspot/{surfspotid}", config: collectionController.deleteSurfspot },
+
+  { method: "GET", path: "/surfspot/{id}/editsurfspot/{surfspotid}", config: surfspotController.index },
+  { method: "POST", path: "/surfspot/{id}/updatesurfspot/{surfspotid}", config: surfspotController.update },
+
+ // { method: "GET", path: "/{param*}", handler: { directory: { path: "./public" } }, options: { auth: false } },
 
 ];
