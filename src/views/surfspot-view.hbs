@@ -1,0 +1,19 @@
+{{> menu}}
+
+<form class="box"  action="/surfspot/{{playlist._id}}/updatesurfspot/{{surfspot._id}}" method="POST">
+  <label>Update Surfspot Details:</label>
+  <div class="field is-horizontal">
+    <div class="field-body">
+      <div class="field">
+        <input class="input" type="text" name="name", value="{{surfspot.namoe}}">
+      </div>
+      <div class="field">
+        <input class="input" type="text" name="location" value="{{surfspot.location}}">
+      </div>
+      <div class="field">
+        <input class="input" type="text"  name="typeOfWave" value="{{surfspot.typeOfWave}}">
+      </div>
+    </div>
+  </div>
+  <button class="button is-primary">Update Surfspot</button>
+</form>

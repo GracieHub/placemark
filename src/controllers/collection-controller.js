@@ -14,13 +14,7 @@ export const collectionController = {
   },
 
   addSurfspot: { 
-    validate: {
-      payload: SurfspotSpec,
-      options: { abortEarly: false },
-      failAction: function (request, h, error) {
-        return h.view("collection-view", { title: "Add Surf Spot error", errors: error.details }).takeover().code(400);
-      },
-    },
+    
     handler: async function (request, h) {
       const collection = await db.collectionStore.getCollectionById(request.params.id);
       const newSurfspot = {
