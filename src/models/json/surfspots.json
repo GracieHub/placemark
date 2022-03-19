@@ -1,3 +1,81 @@
 {
-  "surfspots": []
+  "surfspots": [
+    {
+      "name": "Tramore",
+      "location": "blablabla",
+      "typeOfWave": "beach",
+      "_id": "3815a567-edfc-419a-981d-bf0fb0e96486",
+      "collectionid": "92c43961-cb93-4fb9-b00d-91766912f822"
+    },
+    {
+      "name": "Bunmahon",
+      "location": "",
+      "typeOfWave": "",
+      "_id": "102046d1-aec9-4500-91d7-98e80d033df2",
+      "collectionid": "96ca0b28-40ef-4cc2-b95b-1bef5230a667"
+    },
+    {
+      "name": "Tramore",
+      "location": "",
+      "typeOfWave": "",
+      "_id": "634926d5-23cb-458a-8c22-47ed80d98433",
+      "collectionid": "96ca0b28-40ef-4cc2-b95b-1bef5230a667"
+    },
+    {
+      "name": "Bunmahon",
+      "location": "",
+      "typeOfWave": "",
+      "_id": "f2ea43e4-6608-497f-8fba-40cc77ffe7c7",
+      "collectionid": "40c35f0c-c4d3-40dd-94ca-9c1c87e2daf0"
+    },
+    {
+      "name": "Tramore",
+      "location": "",
+      "typeOfWave": "",
+      "_id": "0eb63271-7fc4-40d1-b83a-d9629acc003b",
+      "collectionid": "40c35f0c-c4d3-40dd-94ca-9c1c87e2daf0"
+    },
+    {
+      "name": "The Incredible",
+      "location": "",
+      "typeOfWave": "",
+      "_id": "655fe148-dc1d-43d8-a98f-3280879ce21d",
+      "collectionid": "40c35f0c-c4d3-40dd-94ca-9c1c87e2daf0"
+    },
+    {
+      "name": "The Perfect Wave",
+      "location": "",
+      "typeOfWave": "",
+      "_id": "b1f1b2ca-9f08-47a9-b2f6-0c1fdb6b83e5",
+      "collectionid": "40c35f0c-c4d3-40dd-94ca-9c1c87e2daf0"
+    },
+    {
+      "name": "Dunmore",
+      "location": "",
+      "typeOfWave": "",
+      "_id": "fed77cac-39c9-4954-910d-637f35116696",
+      "collectionid": "40c35f0c-c4d3-40dd-94ca-9c1c87e2daf0"
+    },
+    {
+      "name": "Tramore",
+      "location": "",
+      "typeOfWave": "",
+      "_id": "bb8827c2-222f-4140-915d-a16d533a3455",
+      "collectionid": "c586a097-4824-4b90-88d9-9c09bac0929d"
+    },
+    {
+      "name": "Bunmahon",
+      "location": "",
+      "typeOfWave": "",
+      "_id": "d8b24f43-f198-4852-846e-c702b847027f",
+      "collectionid": "c586a097-4824-4b90-88d9-9c09bac0929d"
+    },
+    {
+      "name": "Annestown",
+      "location": "",
+      "typeOfWave": "",
+      "_id": "e190e924-3c4f-40c7-8d48-3b3eafd5fe87",
+      "collectionid": "c586a097-4824-4b90-88d9-9c09bac0929d"
+    }
+  ]
 }
