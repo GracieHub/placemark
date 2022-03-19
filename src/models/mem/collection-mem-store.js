@@ -16,8 +16,11 @@ export const collectionMemStore = {
 
   async getCollectionById(id) {
     const list = collections.find((collection) => collection._id === id);
-    list.surfspots = await surfspotMemStore.getSurfspotsByCollectionId(list._id);
-    return list;  
+    if (list) {
+      list.surfspots = await surfspotMemStore.getSurfspotsByCollectionId(list._id);
+      return list;
+    }
+    return null;
   },
 
   async getUserCollections(userid) {
@@ -26,7 +29,7 @@ export const collectionMemStore = {
 
   async deleteCollectionById(id) {
     const index = collections.findIndex((collection) => collection._id === id);
-    collections.splice(index, 1);
+    if (index !== -1) collections.splice(index, 1);
   },
 
   async deleteAllCollections() {

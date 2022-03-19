@@ -3,7 +3,7 @@ import { v4 } from "uuid";
 let surfspots = [];
 
 export const surfspotMemStore = {
-  async getAllsurfspots() {
+  async getAllSurfspots() {
     return surfspots;
   },
 
