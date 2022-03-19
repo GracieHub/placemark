@@ -11,9 +11,17 @@ export const db = {
   collectionStore: null,
   surfspotStore: null,
 
-  init() {
-    this.userStore = userJsonStore;
-    this.collectionStore = collectionJsonStore;
-    this.surfspotStore = surfspotJsonStore;
+  init(storeType) {
+    switch (storeType) {
+      case "json":
+        this.userStore = userJsonStore;
+        this.collectionStore = collectionJsonStore;
+        this.surfspotStore = surfspotJsonStore;
+        break;
+      default:
+        this.userStore = userMemStore;
+        this.collectionStore = collectionMemStore;
+        this.surfspotStore = surfspotMemStore;
+    }
   },
 };
