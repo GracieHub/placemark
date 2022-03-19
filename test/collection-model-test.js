@@ -1,11 +1,13 @@
 import { assert } from "chai";
 import { db } from "../src/models/db.js";
 import { testCollections, waterford } from "./fixtures.js";
+import { assertSubset } from "./test-utils.js";
+
 
 suite("Collection Model tests", () => {
 
   setup(async () => {
-    db.init("");
+    db.init("mongo");
     await db.collectionStore.deleteAllCollections();
     for (let i = 0; i < testCollections.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
@@ -15,7 +17,7 @@ suite("Collection Model tests", () => {
 
   test("create a Collection", async () => {
     const Collection = await db.collectionStore.addCollection(waterford);
-    assert.equal(waterford, Collection);
+    assertSubset(waterford, Collection);
     assert.isDefined(Collection._id);
   });
 
@@ -30,7 +32,7 @@ suite("Collection Model tests", () => {
   test("get a Collection - success", async () => {
     const Collection = await db.collectionStore.addCollection(waterford);
     const returnedCollection = await db.collectionStore.getCollectionById(Collection._id);
-    assert.equal(waterford, Collection);
+    assertSubset(waterford, Collection);
   });
 
   test("delete One Playist - success", async () => {
