@@ -12,7 +12,8 @@ suite("User Model tests", () => {
     await db.userStore.deleteAll();
     for (let i = 0; i < testUsers.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
-      await db.userStore.addUser(testUsers[i]);
+      testUsers[i] = await
+      db.userStore.addUser(testUsers[i]);
     }
   });
 
