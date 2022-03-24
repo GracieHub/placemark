@@ -30,6 +30,16 @@ export const waterford = {
   title: "Waterford Surf Spots"
 };
 
+export const sligo = {
+  "name": "Violin Concerto No. 3",
+  "location": "blaaablaaa",
+  "typeOfWave": "blablabla"
+};
+
+export const donegal = {
+  title: "Donegal Favourites"
+};
+
 export const testCollections = [
   {
     title: "Sligo Surf Spots"
@@ -39,5 +49,23 @@ export const testCollections = [
   },
   {
     title: "Clare Favourites"
+  }
+];
+
+export const testSurfspots = [
+  {
+    "name": "The Perfect Wave",
+    "location": "lat long figures",
+    "typeOfWave": "sdsds"
+  },
+  {
+    "name": "Tramore",
+    "location": "lat long",
+    "TypeOfWave": "sds"
+  },
+  {
+    "name": "Easkey",
+    "location": "latlongfix",
+    "typeOfWave": "asdas"
   }
 ];
