@@ -49,5 +49,30 @@ export const geosurfService = {
             const res = await axios.get(`${this.geosurfUrl}/api/collections/${id}`);
             return res.data;
         },
-    };
+
+        async getAllSurfspots() {
+            const res = await axios.get(`${this.geosurfUrl}/api/surfspots`);
+            return res.data;
+          },
+        
+        async createSurfspot(id, surfspot) {
+            const res = await axios.post(`${this.geosurfUrl}/api/collections/${id}/surfspots`, surfspot);
+            return res.data;
+          },
+        
+        async deleteAllSurfspots() {
+            const res = await axios.delete(`${this.geosurfUrl}/api/surfspots`);
+            return res.data;
+          },
+        
+        async getSurfspot(id) {
+            const res = await axios.get(`${this.geosurfUrl}/api/surfspots/${id}`);
+            return res.data;
+          },
+        
+        async deleteSurfspot(id) {
+            const res = await axios.delete(`${this.geosurfUrl}/api/surfspots/${id}`);
+            return res.data;
+          },
+        };
     
