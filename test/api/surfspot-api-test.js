@@ -5,22 +5,62 @@ import { maggie, waterford, testCollections, testSurfspots, donegal, sligo } fro
 
 suite("Surfspot API tests", () => {
   let user = null;
-  let SligoSurfSpots = null;
+  let easkey = null;
 
   setup(async () => {
+    await geosurfService.deleteAllCollections();
+    await geosurfService.deleteAllUsers();
+    await geosurfService.deleteAllSurfspots();
+    user = await geosurfService.createUser(maggie);
+    waterford.userid = user._id;
+    easkey = await geosurfService.createCollection(waterford);
   });
 
   teardown(async () => {});
 
-  test("create Surfspot", async () => {
+  test("create surfspot", async () => {
+    const returnedSurfspot = await geosurfService.createSurfspot(easkey._id, sligo);
+    assertSubset(sligo, returnedSurfspot);
   });
 
   test("create Multiple Surfspots", async () => {
+    for (let i = 0; i < testSurfspots.length; i += 1) {
+      // eslint-disable-next-line no-await-in-loop
+      await geosurfService.createSurfspot(easkey._id, testSurfspots[i]);
+    }
+    const returnedSurfspots = await geosurfService.getAllSurfspots();
+    assert.equal(returnedSurfspots.length, testSurfspots.length);
+    for (let i = 0; i < returnedSurfspots.length; i += 1) {
+      // eslint-disable-next-line no-await-in-loop
+      const Surfspot = await geosurfService.getSurfspot(returnedSurfspots[i]._id);
+      assertSubset(Surfspot, returnedSurfspots[i]);
+    }
   });
 
-  test("Delete Surfspot", async () => {
+  test("delete SurfspotApi", async () => {
+    for (let i = 0; i < testSurfspots.length; i += 1) {
+      // eslint-disable-next-line no-await-in-loop
+      await geosurfService.createSurfspot(easkey._id, testSurfspots[i]);
+    }
+    let returnedSurfspots = await geosurfService.getAllSurfspots();
+    assert.equal(returnedSurfspots.length, testSurfspots.length);
+    for (let i = 0; i < returnedSurfspots.length; i += 1) {
+      // eslint-disable-next-line no-await-in-loop
+      const Surfspot = await geosurfService.deleteSurfspot(returnedSurfspots[i]._id);
+    }
+    returnedSurfspots = await geosurfService.getAllSurfspots();
+    assert.equal(returnedSurfspots.length, 0);
   });
 
-  test("test denormalised Collection", async () => {
+  test("denormalised collection", async () => {
+    for (let i = 0; i < testSurfspots.length; i += 1) {
+      // eslint-disable-next-line no-await-in-loop
+      await geosurfService.createSurfspot(easkey._id, testSurfspots[i]);
+    }
+    const returnedCollection = await geosurfService.getCollection(easkey._id);
+    assert.equal(returnedCollection.surfspots.length, testSurfspots.length);
+    for (let i = 0; i < testSurfspots.length; i += 1) {
+      assertSubset(testSurfspots[i], returnedCollection.surfspots[i]);
+    }
   });
 });
