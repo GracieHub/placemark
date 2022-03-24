@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node src/server.js",
-    "dev": "nodemon --verbose src/server.js",
+    "dev": "./node_modules/.bin/nodemon src/server.js --ignore 'src/models/json/*.json'",
     "lint": "./node_modules/.bin/eslint . --ext .js",
     "test": "./node_modules/mocha/bin/mocha --ui tdd test/**/*.js",
     "testmodels": "./node_modules/mocha/bin/mocha --ui tdd test/models/**/*.js",
@@ -37,7 +37,6 @@
     "joi": "^17.6.0",
     "lowdb": "^3.0.0",
     "mongoose": "^6.2.7",
-    "nodemon": "^2.0.15",
     "uuid": "^8.3.2"
   },
   "repository": {

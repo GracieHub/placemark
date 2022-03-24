@@ -1,20 +1,22 @@
 import { Surfspot } from "./surfspot.js";
+import { Collection } from "./collection.js";
+
 
 export const surfspotMongoStore = {
   async getAllSurfspots() {
-    const Surfspots = await Surfspot.find().lean();
-    return Surfspots;
+    const surfspots = await Surfspot.find().lean();
+    return surfspots;
   },
 
   async addSurfspot(collectionId, surfspot) {
-    surfspot.Collectionid = collectionId;
+    surfspot.collectionid = collectionId;
     const newSurfspot = new Surfspot(surfspot);
     const surfspotObj = await newSurfspot.save();
     return this.getSurfspotById(surfspotObj._id);
   },
 
   async getSurfspotsByCollectionId(id) {
-    const surfspots = await Surfspot.find({ Collectionid: id }).lean();
+    const surfspots = await Surfspot.find({ collectionid: id }).lean();
     return surfspots;
   },
 

@@ -17,7 +17,7 @@ export const apiRoutes = [
 
   { method: "GET", path: "/api/surfspots", config: surfspotApi.find },
   { method: "GET", path: "/api/surfspots/{id}", config: surfspotApi.findOne },
-  { method: "POST", path: "/api/playlists/{id}/surfspots", config: surfspotApi.create },
+  { method: "POST", path: "/api/collections/{id}/surfspots", config: surfspotApi.create },
   { method: "DELETE", path: "/api/surfspots", config: surfspotApi.deleteAll },
   { method: "DELETE", path: "/api/surfspots/{id}", config: surfspotApi.deleteOne },
 ];
