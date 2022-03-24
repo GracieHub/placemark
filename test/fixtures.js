@@ -1,3 +1,5 @@
+export const serviceUrl = "http://localhost:3000";
+
 export const maggie = {
   firstName: "Maggie",
   lastName: "Simpson",
@@ -31,7 +33,7 @@ export const waterford = {
 };
 
 export const sligo = {
-  "name": "Violin Concerto No. 3",
+  "name": "Easkey",
   "location": "blaaablaaa",
   "typeOfWave": "blablabla"
 };
