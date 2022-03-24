@@ -28,7 +28,7 @@ export const surfspotController = {
       const newSurfspot = {
         name: request.payload.name,
         location: request.payload.location,
-        typeOfWave: Number(request.payload.typeOfWave),
+        typeOfWave: request.payload.typeOfWave,
       };
       await db.surfspotStore.updateSurfspot(surfspot, newSurfspot);
       return h.redirect(`/collection/${request.params.id}`);
