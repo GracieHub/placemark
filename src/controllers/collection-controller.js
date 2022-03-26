@@ -19,7 +19,8 @@ export const collectionController = {
       const collection = await db.collectionStore.getCollectionById(request.params.id);
       const newSurfspot = {
         name: request.payload.name,
-        location: request.payload.location,
+        latitude: Number(request.payload.latitude),
+        longitude: Number(request.payload.longitude),
         typeOfWave: request.payload.typeOfWave,
       };
       await db.surfspotStore.addSurfspot(collection._id, newSurfspot);

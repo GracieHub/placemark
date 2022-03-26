@@ -24,7 +24,8 @@ export const UserArray = Joi.array().items(UserSpecPlus).label("UserArray");
 export const SurfspotSpec = Joi.object()
 .keys({
   name: Joi.string().required().example("Easkey"),
-  location: Joi.string().required().example("Easkey Castle"),
+  latitude: Joi.number().allow("").optional().example(54.2863),
+  longitude: Joi.number().allow("").optional().example(8.9624),
   typeOfWave: Joi.string().required().example("Advanced"),
   collectionid: IdSpec,
 })
