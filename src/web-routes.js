@@ -25,6 +25,5 @@ export const webRoutes = [
   { method: "GET", path: "/surfspot/{id}/editsurfspot/{surfspotid}", config: surfspotController.index },
   { method: "POST", path: "/surfspot/{id}/updatesurfspot/{surfspotid}", config: surfspotController.update },
 
- // { method: "GET", path: "/{param*}", handler: { directory: { path: "./public" } }, options: { auth: false } },
-
+  { method: "GET", path: "/{param*}", handler: { directory: { path: "./public" } }, options: { auth: false } }
 ];

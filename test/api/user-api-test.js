@@ -3,6 +3,7 @@ import { geosurfService } from "./geosurf-service.js";
 import { assertSubset } from "../test-utils.js";
 import { maggie, testUsers } from "../fixtures.js";
 
+const users = new Array(testUsers.length);
 
 suite("User API tests", () => {
   setup(async () => {
@@ -21,7 +22,7 @@ suite("User API tests", () => {
     assert.isDefined(newUser._id);
   });
 
-  test("delete all users", async () => {
+  test("delete all userApi", async () => {
     let returnedUsers = await geosurfService.getAllUsers();
     assert.equal(returnedUsers.length, 3);
     await geosurfService.deleteAllUsers();
