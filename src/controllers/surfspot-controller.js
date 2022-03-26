@@ -27,7 +27,8 @@ export const surfspotController = {
       const surfspot = await db.surfspotStore.getSurfspotById(request.params.surfspotid);
       const newSurfspot = {
         name: request.payload.name,
-        location: request.payload.location,
+        latitude: Number(request.payload.latitude),
+        longitude: Number(request.payload.longitude),
         typeOfWave: request.payload.typeOfWave,
       };
       await db.surfspotStore.updateSurfspot(surfspot, newSurfspot);

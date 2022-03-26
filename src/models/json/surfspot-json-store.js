@@ -44,7 +44,8 @@ export const surfspotJsonStore = {
 
   async updateSurfspot(surfspot, updatedSurfspot) {
     surfspot.name = updatedSurfspot.name;
-    surfspot.location = updatedSurfspot.location;
+    surfspot.latitude = updatedSurfspot.latitude;
+    surfspot.longitude = updatedSurfspot.longitude;
     surfspot.typeOfWave = updatedSurfspot.typeOfWave;
     await db.write();
   },

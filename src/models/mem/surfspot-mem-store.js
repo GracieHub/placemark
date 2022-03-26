@@ -35,9 +35,10 @@ export const surfspotMemStore = {
     surfspots = [];
   },
 
-  async updateSurfspot(surfspot, updatedsurfspot) {
-    surfspot.name = updatedsurfspot.name;
-    surfspot.location = updatedsurfspot.location;
-    surfspot.typeOfWave = updatedsurfspot.typeOfWave;
+  async updateSurfspot(surfspot, updatedSurfspot) {
+    surfspot.name = updatedSurfspot.name;
+    surfspot.latitude = updatedSurfspot.latitude;
+    surfspot.longitude = updatedSurfspot.longitude;
+    surfspot.typeOfWave = updatedSurfspot.typeOfWave;
   },
 };
