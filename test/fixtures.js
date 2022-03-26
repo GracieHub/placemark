@@ -34,8 +34,8 @@ export const waterford = {
 
 export const sligo = {
   "name": "Easkey",
-  "location": "blaaablaaa",
-  "typeOfWave": "blablabla"
+  "location": "Easkey Castle",
+  "typeOfWave": "Advanced"
 };
 
 export const donegal = {
@@ -63,7 +63,7 @@ export const testSurfspots = [
   {
     "name": "Tramore",
     "location": "lat long",
-    "TypeOfWave": "sds"
+    "typeOfWave": "sds"
   },
   {
     "name": "Easkey",
