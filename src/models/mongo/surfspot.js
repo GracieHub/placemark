@@ -4,7 +4,8 @@ const { Schema } = Mongoose;
 
 const surfspotSchema = new Schema({
   name: String,
-  location: String,
+  latitude: Number,
+  longitude: Number,
   typeOfWave: String,
   collectionid: {
     type: Schema.Types.ObjectId,

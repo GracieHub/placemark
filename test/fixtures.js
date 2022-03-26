@@ -34,7 +34,8 @@ export const waterford = {
 
 export const sligo = {
   "name": "Easkey",
-  "location": "Easkey Castle",
+  "latitude": 54.2863,
+  "longitude": 8.9624,
   "typeOfWave": "Advanced"
 };
 
@@ -57,17 +58,20 @@ export const testCollections = [
 export const testSurfspots = [
   {
     "name": "The Perfect Wave",
-    "location": "lat long figures",
-    "typeOfWave": "sdsds"
+    "latitude": 51.9990,
+    "longitude": 9.7432,
+    "typeOfWave": "Advanced"
   },
   {
     "name": "Tramore",
-    "location": "lat long",
-    "typeOfWave": "sds"
+    "latitude": 52.1585,
+    "longitude": 7.1444,
+    "typeOfWave": "Beginner beach break"
   },
   {
     "name": "Easkey",
-    "location": "latlongfix",
-    "typeOfWave": "asdas"
+    "latitude": 54.2863,
+    "longitude": 8.9624,
+    "typeOfWave": "Intermediate sandbank, long left hander"
   }
 ];
