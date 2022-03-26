@@ -2,6 +2,8 @@ import { assert } from "chai";
 import { assertSubset } from "../test-utils.js";
 import { geosurfService } from "./geosurf-service.js";
 import { maggie, waterford, testCollections, testSurfspots, donegal, sligo } from "../fixtures.js";
+import { db } from "../../src/models/db.js";
+
 
 suite("Surfspot API tests", () => {
   let user = null;
@@ -32,8 +34,8 @@ suite("Surfspot API tests", () => {
     assert.equal(returnedSurfspots.length, testSurfspots.length);
     for (let i = 0; i < returnedSurfspots.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
-      const Surfspot = await geosurfService.getSurfspot(returnedSurfspots[i]._id);
-      assertSubset(Surfspot, returnedSurfspots[i]);
+      const surfspot = await geosurfService.getSurfspot(returnedSurfspots[i]._id);
+      assertSubset(surfspot, returnedSurfspots[i]);
     }
   });
 
@@ -46,7 +48,7 @@ suite("Surfspot API tests", () => {
     assert.equal(returnedSurfspots.length, testSurfspots.length);
     for (let i = 0; i < returnedSurfspots.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
-      const Surfspot = await geosurfService.deleteSurfspot(returnedSurfspots[i]._id);
+      const surfspot = await geosurfService.deleteSurfspot(returnedSurfspots[i]._id);
     }
     returnedSurfspots = await geosurfService.getAllSurfspots();
     assert.equal(returnedSurfspots.length, 0);

@@ -43,6 +43,11 @@
     "type": "git",
     "url": "git+https://github.com/GracieHub/placemark.git"
   },
+  "keywords": [
+    "node",
+    "hapi"
+  ],
+  
   "bugs": {
     "url": "https://github.com/GracieHub/placemark/issues"
   },

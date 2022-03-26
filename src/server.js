@@ -1,4 +1,6 @@
 import Hapi from "@hapi/hapi";
+import Inert from "@hapi/inert";
+import HapiSwagger from "hapi-swagger";
 import Joi from "joi";
 import Vision from "@hapi/vision";
 import Handlebars from "handlebars";
@@ -11,6 +13,7 @@ import { db } from "./models/db.js";
 import { accountsController } from "./controllers/accounts-controller.js";
 import { apiRoutes } from "./api-routes.js";
 
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -20,6 +23,13 @@ if (result.error) {
   process.exit(1);
 }
 
+const swaggerOptions = {
+  info: {
+    title: "GeoSurf API",
+    version: "0.1",
+  },
+};
+
 async function init() {
   const server = Hapi.server({
     port: 3000,
@@ -27,7 +37,18 @@ async function init() {
   });
   await server.register(Vision);
   await server.register(Cookie);
+  await server.register(Inert);
+
+  await server.register([
+    Inert,
+    Vision,
+    {
+      plugin: HapiSwagger,
+      options: swaggerOptions,
+    },
+  ]);
   server.validator(Joi);
+
 
   server.views({
     engines: {
