@@ -1,4 +1,5 @@
 import { SurfspotSpec } from "../models/joi-schemas.js";
+
 import { db } from "../models/db.js";
 
 export const collectionController = {
@@ -14,7 +15,13 @@ export const collectionController = {
   },
 
   addSurfspot: { 
-    
+    validate: {
+      payload: SurfspotSpec,
+      options: { abortEarly: false },
+      failAction: function (request, h, error) {
+        return h.view("collection-view", { name: "Add Surfspot error", errors: error.details }).takeover().code(400);
+      },
+    },
     handler: async function (request, h) {
       const collection = await db.collectionStore.getCollectionById(request.params.id);
       const newSurfspot = {

@@ -1,7 +1,7 @@
 import { assert } from "chai";
 import { assertSubset } from "../test-utils.js";
 import { geosurfService } from "./geosurf-service.js";
-import { maggie, waterford, testCollections, testSurfspots, donegal, sligo } from "../fixtures.js";
+import { maggie, maggieCredentials, waterford, testCollections, testSurfspots, donegal, sligo } from "../fixtures.js";
 import { db } from "../../src/models/db.js";
 
 
@@ -12,12 +12,12 @@ suite("Surfspot API tests", () => {
   setup(async () => {
     geosurfService.clearAuth();
     user = await geosurfService.createUser(maggie);
-    await geosurfService.authenticate(maggie);
+    await geosurfService.authenticate(maggieCredentials);
     await geosurfService.deleteAllCollections();
     await geosurfService.deleteAllSurfspots();
     await geosurfService.deleteAllUsers();
     user = await geosurfService.createUser(maggie);
-    await geosurfService.authenticate(maggie);
+    await geosurfService.authenticate(maggieCredentials);
     waterford.userid = user._id;
     easkey = await geosurfService.createCollection(waterford);
   });

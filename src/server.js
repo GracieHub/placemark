@@ -9,11 +9,11 @@ import path from "path";
 import { fileURLToPath } from "url";
 import Cookie from "@hapi/cookie"; 
 import dotenv from "dotenv";
-import { validate } from "./api/jwt-utils.js";
 import { webRoutes } from "./web-routes.js";
 import { db } from "./models/db.js";
 import { accountsController } from "./controllers/accounts-controller.js";
 import { apiRoutes } from "./api-routes.js";
+import { validate } from "./api/jwt-utils.js";
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -28,7 +28,7 @@ if (result.error) {
 const swaggerOptions = {
   info: {
     title: "GeoSurf API",
-    version: "0.1"
+    version: "0.1",
   },
   securityDefinitions: {
     jwt: {
@@ -50,6 +50,7 @@ async function init() {
   await server.register(Inert);
   await server.register(jwt);
 
+
   await server.register([
     Inert,
     Vision,
@@ -58,8 +59,8 @@ async function init() {
       options: swaggerOptions,
     },
   ]);
-  server.validator(Joi);
 
+  server.validator(Joi);
 
   server.views({
     engines: {
@@ -84,11 +85,12 @@ async function init() {
     validateFunc: accountsController.validate,
   });
   server.auth.strategy("jwt", "jwt", {
-    key: process.env.cookie_password,
+    key: process.env.COOKIE_PASSWORD,
     validate: validate,
     verifyOptions: { algorithms: ["HS256"] }
-  });
+  })
    server.auth.default("session");
+
 
 
   db.init("mongo");
