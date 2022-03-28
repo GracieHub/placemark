@@ -10,10 +10,14 @@ suite("Surfspot API tests", () => {
   let easkey = null;
 
   setup(async () => {
-    await geosurfService.deleteAllCollections();
-    await geosurfService.deleteAllUsers();
-    await geosurfService.deleteAllSurfspots();
+    geosurfService.clearAuth();
     user = await geosurfService.createUser(maggie);
+    await geosurfService.authenticate(maggie);
+    await geosurfService.deleteAllCollections();
+    await geosurfService.deleteAllSurfspots();
+    await geosurfService.deleteAllUsers();
+    user = await geosurfService.createUser(maggie);
+    await geosurfService.authenticate(maggie);
     waterford.userid = user._id;
     easkey = await geosurfService.createCollection(waterford);
   });
