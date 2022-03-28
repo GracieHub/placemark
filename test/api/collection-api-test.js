@@ -9,12 +9,15 @@ suite("Collection API tests", () => {
     let user = null;
   
     setup(async () => {
+      geosurfService.clearAuth();
+      user = await geosurfService.createUser(maggie);
+      await geosurfService.authenticate(maggie);
       await geosurfService.deleteAllCollections();
       await geosurfService.deleteAllUsers();
       user = await geosurfService.createUser(maggie);
+      await geosurfService.authenticate(maggie);
       waterford.userid = user._id;
     });
-
   teardown(async () => {});
 
   test("create Collection", async () => {
