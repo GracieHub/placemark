@@ -40,10 +40,12 @@ export const surfspotMongoStore = {
     await Surfspot.deleteMany({});
   },
 
-  async updateSurfspot(surfspot, updatedSurfspot) {
+  async updateSurfspot(surfspotid, updatedSurfspot) {
+    const surfspot = await Surfspot.findOne({ _id: surfspotid });
     surfspot.name = updatedSurfspot.name;
     surfspot.latitude = updatedSurfspot.latitude;
-    surfspot.longitude = updatedSurfspot.longitude;    surfspot.typeOfWave = updatedSurfspot.typeOfWave;
+    surfspot.longitude = updatedSurfspot.longitude;    
+    surfspot.typeOfWave = updatedSurfspot.typeOfWave;
     await surfspot.save();
   },
 };
