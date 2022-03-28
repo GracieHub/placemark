@@ -52,3 +52,10 @@ export const CollectionSpecPlus = CollectionSpec.keys({
 }).label("CollectionPlus");
 
 export const CollectionArraySpec = Joi.array().items(CollectionSpecPlus).label("CollectionArray");
+
+export const JwtAuth = Joi.object()
+  .keys({
+    success: Joi.boolean().example("true").required(),
+    token: Joi.string().example("eyJhbGciOiJND.g5YmJisIjoiaGYwNTNjAOhE.gCWGmY5-YigQw0DCBo").required(),
+  })
+  .label("JwtAuth");

@@ -5,7 +5,9 @@ import { validationError } from "./logger.js";
 
 export const surfspotApi = {
   find: {
-    auth: false,
+        auth: {
+      strategy: "jwt",
+    },
     handler: async function (request, h) {
       try {
         const surfspots = await db.surfspotStore.getAllSurfspots();
@@ -21,7 +23,9 @@ export const surfspotApi = {
   },
 
   findOne: {
-    auth: false,
+        auth: {
+      strategy: "jwt",
+    },
     async handler(request) {
       try {
         const surfspot = await db.surfspotStore.getSurfspotById(request.params.id);
@@ -41,7 +45,9 @@ export const surfspotApi = {
   },
 
   create: {
-    auth: false,
+        auth: {
+      strategy: "jwt",
+    },
     handler: async function (request, h) {
       try {
         const surfspot = await db.surfspotStore.addSurfspot(request.params.id, request.payload);
@@ -61,7 +67,9 @@ export const surfspotApi = {
   },
 
   deleteAll: {
-    auth: false,
+        auth: {
+      strategy: "jwt",
+    },
     handler: async function (request, h) {
       try {
         await db.surfspotStore.deleteAllSurfspots();
@@ -75,7 +83,9 @@ export const surfspotApi = {
   },
 
   deleteOne: {
-    auth: false,
+        auth: {
+      strategy: "jwt",
+    },
     handler: async function (request, h) {
       try {
         const surfspot = await db.surfspotStore.getSurfspotById(request.params.id);
