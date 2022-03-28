@@ -1,12 +1,14 @@
 import Boom from "@hapi/boom";
-import { CollectionSpec } from "../models/joi-schemas.js";
+import { CollectionSpec, CollectionSpecPlus, CollectionArraySpec, IdSpec } from "../models/joi-schemas.js";
 import { db } from "../models/db.js";
+import { validationError } from "./logger.js";
+
 
 export const collectionApi = {
     find: {
-            auth: {
-      strategy: "jwt",
-    },
+        auth: {
+          strategy: "jwt",
+        },
         handler: async function (request, h) {
           try {
             const collections = await db.collectionStore.getAllCollections();
@@ -15,12 +17,16 @@ export const collectionApi = {
             return Boom.serverUnavailable("Database Error");
           }
         },
+        tags: ["api"],
+        response: { schema: CollectionArraySpec, failAction: validationError },
+        description: "Get all collections",
+        notes: "Returns all collections",
       },
 
   findOne: {
-        auth: {
-      strategy: "jwt",
-    },
+    auth: {
+          strategy: "jwt",
+        },
     async handler(request) {
       try {
         const collection = await db.collectionStore.getCollectionById(request.params.id);
@@ -32,12 +38,17 @@ export const collectionApi = {
         return Boom.serverUnavailable("No collection with this id");
       }
     },
+    tags: ["api"],
+    description: "Find a Collection",
+    notes: "Returns a Collection",
+    validate: { params: { id: IdSpec }, failAction: validationError },
+    response: { schema: CollectionSpecPlus, failAction: validationError },
   },
 
   create: {
-        auth: {
-      strategy: "jwt",
-    },
+    auth: {
+          strategy: "jwt",
+        },
     handler: async function (request, h) {
       try {
         const collection = request.payload;
@@ -50,12 +61,17 @@ export const collectionApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
+    tags: ["api"],
+    description: "Create a Collection",
+    notes: "Returns the newly created Collection",
+    validate: { payload: CollectionSpec, failAction: validationError },
+    response: { schema: CollectionSpecPlus, failAction: validationError },
   },
 
   deleteOne: {
-        auth: {
-      strategy: "jwt",
-    },
+    auth: {
+          strategy: "jwt",
+        },
     handler: async function (request, h) {
       try {
         const collection = await db.collectionStore.getCollectionById(request.params.id);
@@ -68,12 +84,15 @@ export const collectionApi = {
         return Boom.serverUnavailable("No collection with this id");
       }
     },
+    tags: ["api"],
+    description: "Delete a collection",
+    validate: { params: { id: IdSpec }, failAction: validationError },
   },
 
   deleteAll: {
-        auth: {
-      strategy: "jwt",
-    },
+    auth: {
+          strategy: "jwt",
+        },
     handler: async function (request, h) {
       try {
         await db.collectionStore.deleteAllCollections();
@@ -83,4 +102,6 @@ export const collectionApi = {
       }
     },
   },
+  tags: ["api"],
+  description: "Delete all CollectionApi",
 };

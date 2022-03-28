@@ -5,7 +5,7 @@ import { validationError } from "./logger.js";
 
 export const surfspotApi = {
   find: {
-        auth: {
+    auth: {
       strategy: "jwt",
     },
     handler: async function (request, h) {
@@ -18,34 +18,34 @@ export const surfspotApi = {
     },
     tags: ["api"],
     response: { schema: SurfspotArraySpec, failAction: validationError },
-    description: "Get all SurfspotApi",
-    notes: "Returns all SurfspotApi",
+    description: "Get all surfspotApi",
+    notes: "Returns all surfspotApi",
   },
 
   findOne: {
-        auth: {
+    auth: {
       strategy: "jwt",
     },
     async handler(request) {
       try {
         const surfspot = await db.surfspotStore.getSurfspotById(request.params.id);
         if (!surfspot) {
-          return Boom.notFound("No Surfspot with this id");
+          return Boom.notFound("No surfspot with this id");
         }
         return surfspot;
       } catch (err) {
-        return Boom.serverUnavailable("No Surfspot with this id");
+        return Boom.serverUnavailable("No surfspot with this id");
       }
     },
     tags: ["api"],
-    description: "Find a Surfspot",
-    notes: "Returns a Surfspot",
+    description: "Find a surfspot",
+    notes: "Returns a surfspot",
     validate: { params: { id: IdSpec }, failAction: validationError },
     response: { schema: SurfspotSpecPlus, failAction: validationError },
   },
 
   create: {
-        auth: {
+    auth: {
       strategy: "jwt",
     },
     handler: async function (request, h) {
@@ -54,20 +54,20 @@ export const surfspotApi = {
         if (surfspot) {
           return h.response(surfspot).code(201);
         }
-        return Boom.badImplementation("error creating Surfspot");
+        return Boom.badImplementation("error creating surfspot");
       } catch (err) {
         return Boom.serverUnavailable("Database Error");
       }
     },
     tags: ["api"],
-    description: "Create a Surfspot",
-    notes: "Returns the newly created Surfspot",
+    description: "Create a surfspot",
+    notes: "Returns the newly created surfspot",
     validate: { payload: SurfspotSpec },
     response: { schema: SurfspotSpecPlus, failAction: validationError },
   },
 
   deleteAll: {
-        auth: {
+    auth: {
       strategy: "jwt",
     },
     handler: async function (request, h) {
@@ -79,27 +79,27 @@ export const surfspotApi = {
       }
     },
     tags: ["api"],
-    description: "Delete all SurfspotApi",
+    description: "Delete all surfspotApi",
   },
 
   deleteOne: {
-        auth: {
+    auth: {
       strategy: "jwt",
     },
     handler: async function (request, h) {
       try {
         const surfspot = await db.surfspotStore.getSurfspotById(request.params.id);
         if (!surfspot) {
-          return Boom.notFound("No Surfspot with this id");
+          return Boom.notFound("No surfspot with this id");
         }
         await db.surfspotStore.deleteSurfspot(surfspot._id);
         return h.response().code(204);
       } catch (err) {
-        return Boom.serverUnavailable("No Surfspot with this id");
+        return Boom.serverUnavailable("No surfspot with this id");
       }
     },
     tags: ["api"],
-    description: "Delete a Surfspot",
+    description: "Delete a surfspot",
     validate: { params: { id: IdSpec }, failAction: validationError },
   },
 };

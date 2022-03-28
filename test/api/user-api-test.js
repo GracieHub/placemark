@@ -20,7 +20,8 @@ suite("User API tests", () => {
     await geosurfService.createUser(maggie);
     await geosurfService.authenticate(maggieCredentials);
   });
-  teardown(async () => {});
+  teardown(async () => {
+  });
 
   test("create a user", async () => {
     const newUser = await geosurfService.createUser(maggie);
@@ -28,7 +29,7 @@ suite("User API tests", () => {
     assert.isDefined(newUser._id);
   });
 
-  test("delete all user", async () => {
+  test("delete all userApi", async () => {
     let returnedUsers = await geosurfService.getAllUsers();
     assert.equal(returnedUsers.length, 4);
     await geosurfService.deleteAllUsers();
@@ -37,9 +38,10 @@ suite("User API tests", () => {
     returnedUsers = await geosurfService.getAllUsers();
     assert.equal(returnedUsers.length, 1);
   });
+
   test("get a user - success", async () => {
-    const returnedUser = await geosurfService.getUser(testUsers[0]._id);
-    assert.deepEqual(testUsers[0], returnedUser);
+    const returnedUser = await geosurfService.getUser(users[0]._id);
+    assert.deepEqual(users[0], returnedUser);
   });
 
   test("get a user - bad id", async () => {
@@ -57,11 +59,11 @@ suite("User API tests", () => {
     await geosurfService.createUser(maggie);
     await geosurfService.authenticate(maggieCredentials);
     try {
-      const returnedUser = await geosurfService.getUser(users[0]._id);
+      const returnedUser = await geosurfService.getUser(testUsers[0]._id);
       assert.fail("Should not return a response");
     } catch (error) {
       assert(error.response.data.message === "No User with this id");
-      assert.equal(error.response.data.statusCode, 404);
+      assert.equal(error.response.data.statusCode, 503);
     }
   });
 });

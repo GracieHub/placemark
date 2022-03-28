@@ -28,7 +28,7 @@ suite("Authentication API tests", async () => {
   });
 
   test("check Unauthorized", async () => {
-    geosurfService.clearAuth();
+    geosurfService.clearAuth()
     try {
       await geosurfService.deleteAllUsers();
       assert.fail("Route not protected");
