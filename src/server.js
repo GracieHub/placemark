@@ -42,8 +42,7 @@ const swaggerOptions = {
 
 async function init() {
   const server = Hapi.server({
-    port: 3000,
-    host: "localhost",
+    port: process.env.PORT || 3000,
   });
   await server.register(Vision);
   await server.register(Cookie);
@@ -77,15 +76,15 @@ async function init() {
 
   server.auth.strategy("session", "cookie", {
     cookie: {
-      name: process.env.COOKIE_NAME,
-      password: process.env.COOKIE_PASSWORD,
+      name: process.env.cookie_name,
+      password: process.env.cookie_password,
       isSecure: false,
     },
     redirectTo: "/",
     validateFunc: accountsController.validate,
   });
   server.auth.strategy("jwt", "jwt", {
-    key: process.env.COOKIE_PASSWORD,
+    key: process.env.cookie_password,
     validate: validate,
     verifyOptions: { algorithms: ["HS256"] }
   })

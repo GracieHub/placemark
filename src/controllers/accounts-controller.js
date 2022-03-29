@@ -50,6 +50,10 @@ export const accountsController = {
       if (!user || user.password !== password) {
         return h.redirect("/");
       }
+      if (user.email === "homer@simpson.com" && user.password === "secret") {
+        request.cookieAuth.set({ id: user._id });
+        return h.redirect("/admin");
+      }
       request.cookieAuth.set({ id: user._id });
       return h.redirect("/dashboard");
     },
@@ -68,4 +72,11 @@ export const accountsController = {
     }
     return { valid: true, credentials: user };
   },
+  showAdmin: {
+    auth: false,
+    handler: function (request, h) {
+      return h.view("admin", { title: "Admin for PlaceMark" });
+    },
+  },
+
 };
