@@ -32,6 +32,6 @@ export const webRoutes = [
   { method: "GET", path: "/admin/deleteuser/{id}", config: adminController.deleteUser },
   { method: "GET", path: "/admin/{id}", config: adminController.userDetails },
 
-  { method: "POST", path: "/playlist/{id}/uploadimage", config: playlistController.uploadImage },
+  { method: "POST", path: "/collection/{id}/uploadimage", config: collectionController.uploadImage },
 
 ];

@@ -19,6 +19,13 @@ export const adminController = {
         },
     },
 
+    userDetails: {
+        handler: async function (request, h) {
+        const user = await db.userStore.getUserById(request.params.id);
+        return h.view("/user");
+        },
+      },
+
     deleteUser: {
         handler: async function (request, h) {
             const user = await db.userStore.getUserById(request.params.id);
