@@ -49,10 +49,4 @@ export const surfspotMongoStore = {
     await surfspot.save();
   },
 
-  async updateCollection(updatedCollection) {
-    const collection = await Collection.findOne({ _id: updatedCollection._id });
-    collection.title = updatedCollection.title;
-    collection.img = updatedCollection.img;
-    await collection.save();
-  },
 };
