@@ -1,9 +1,14 @@
 {{> menu}}
 
-<section class="section">
-  <div class="title">
-    {{collection.title}}
+<section class="section columns is-vcentered">
+  <div class="column has-text-centered">
+    <div class="title">
+      {{collection.title}}
+    </div>
+    {{> list-surfspots}}
+    {{> add-surfspot}}
   </div>
-  {{> list-surfspots}}
-  {{> add-surfspot}}
+  <div class="column">
+    {{> collection-image }}
+  </div>
 </section>
