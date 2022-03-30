@@ -34,6 +34,7 @@
     "cloudinary": "^1.29.0",
     "dotenv": "^16.0.0",
     "handlebars": "^4.7.7",
+    "hapi": "^18.1.0",
     "hapi-auth-jwt2": "^10.2.0",
     "hapi-swagger": "^14.2.5",
     "joi": "^17.6.0",
