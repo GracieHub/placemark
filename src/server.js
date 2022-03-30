@@ -22,7 +22,7 @@ const __dirname = path.dirname(__filename);
 const result = dotenv.config();
 if (result.error) {
   console.log(result.error.message);
-  process.exit(1);
+//  process.exit(1);
 }
 
 const swaggerOptions = {
@@ -42,8 +42,7 @@ const swaggerOptions = {
 
 async function init() {
   const server = Hapi.server({
-    port: 3000,
-    host: "localhost",
+    port: process.env.PORT || 3000,
   });
   await server.register(Vision);
   await server.register(Cookie);
@@ -102,7 +101,7 @@ async function init() {
 
 process.on("unhandledRejection", (err) => {
   console.log(err);
-  process.exit(1);
+//  process.exit(1);
 });
 
 init();
