@@ -19,8 +19,9 @@ export const collectionController = {
     validate: {
       payload: SurfspotSpec,
       options: { abortEarly: false },
-      failAction: function (request, h, error) {
-        return h.view("collection-view", { name: "Add Surfspot error", errors: error.details }).takeover().code(400);
+      failAction: async function (request, h, error) {
+        const collection = await db.collectionStore.getCollectionById(request.params.id);
+        return h.view("collection-view", { name: "Add Surfspot error", collection, errors: error.details }).takeover().code(400);
       },
     },
     handler: async function (request, h) {
