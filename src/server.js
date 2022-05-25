@@ -9,11 +9,14 @@ import path from "path";
 import { fileURLToPath } from "url";
 import Cookie from "@hapi/cookie"; 
 import dotenv from "dotenv";
+import fs from "fs";
 import { webRoutes } from "./web-routes.js";
 import { db } from "./models/db.js";
 import { accountsController } from "./controllers/accounts-controller.js";
 import { apiRoutes } from "./api-routes.js";
 import { validate } from "./api/jwt-utils.js";
+// import { fstat } from "fs";
+
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -43,7 +46,12 @@ const swaggerOptions = {
 async function init() {
   const server = Hapi.server({
     port: process.env.PORT || 3000,
+//    tls: {
+//      key: fs.readFileSync("/Users/grace/GithubRemote/src/keys/webserver.key"),
+//      cert: fs.readFileSync("/Users/grace/GithubRemote/src/keys/webserver.crt")
+//    }
   });
+  
   await server.register(Vision);
   await server.register(Cookie);
   await server.register(Inert);

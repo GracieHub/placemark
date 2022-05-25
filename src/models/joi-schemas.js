@@ -5,13 +5,14 @@ export const IdSpec = Joi.alternatives().try(Joi.string(), Joi.object()).descrip
 export const UserCredentialsSpec = Joi.object()
   .keys({
     email: Joi.string().email().example("homer@simpson.com").required(),
-    password: Joi.string().example("secret").required(),
+    password: Joi.string().example("secret").required().regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$/),
+
   })
   .label("UserCredentials");
 
 export const UserSpec = UserCredentialsSpec.keys({
-  firstName: Joi.string().example("Homer").required(),
-  lastName: Joi.string().example("Simpson").required(),
+  firstName: Joi.string().example("Homer").required().regex(/^[A-Z][a-z]{2,}$/).min(3).max(20),
+  lastName: Joi.string().example("Simpson").required().regex(/^[A-Z][a-z]{2,}$/).min(3).max(20),
 }).label("UserDetails");
 
 export const UserSpecPlus = UserSpec.keys({
