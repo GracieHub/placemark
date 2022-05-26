@@ -9,11 +9,14 @@ import path from "path";
 import { fileURLToPath } from "url";
 import Cookie from "@hapi/cookie"; 
 import dotenv from "dotenv";
+import fs from "fs";
 import { webRoutes } from "./web-routes.js";
 import { db } from "./models/db.js";
 import { accountsController } from "./controllers/accounts-controller.js";
 import { apiRoutes } from "./api-routes.js";
 import { validate } from "./api/jwt-utils.js";
+// import { fstat } from "fs";
+
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -22,7 +25,7 @@ const __dirname = path.dirname(__filename);
 const result = dotenv.config();
 if (result.error) {
   console.log(result.error.message);
-  process.exit(1);
+//  process.exit(1);
 }
 
 const swaggerOptions = {
@@ -42,9 +45,14 @@ const swaggerOptions = {
 
 async function init() {
   const server = Hapi.server({
-    port: 3000,
-    host: "localhost",
+    port: process.env.PORT || 4000,
+    routes: { cors: true },
+//    tls: {
+//      key: fs.readFileSync("/Users/grace/GithubRemote/src/keys/webserver.key"),
+//      cert: fs.readFileSync("/Users/grace/GithubRemote/src/keys/webserver.crt")
+//    }
   });
+  
   await server.register(Vision);
   await server.register(Cookie);
   await server.register(Inert);
@@ -77,15 +85,15 @@ async function init() {
 
   server.auth.strategy("session", "cookie", {
     cookie: {
-      name: process.env.COOKIE_NAME,
-      password: process.env.COOKIE_PASSWORD,
+      name: process.env.cookie_name,
+      password: process.env.cookie_password,
       isSecure: false,
     },
     redirectTo: "/",
     validateFunc: accountsController.validate,
   });
   server.auth.strategy("jwt", "jwt", {
-    key: process.env.COOKIE_PASSWORD,
+    key: process.env.cookie_password,
     validate: validate,
     verifyOptions: { algorithms: ["HS256"] }
   })
@@ -97,7 +105,7 @@ async function init() {
   server.route(webRoutes);
   server.route(apiRoutes);
   await server.start();
-  console.log("Server running on %s", server.info.uri);
+  console.log(`Server running at: ${server.info.uri}`);
 }
 
 process.on("unhandledRejection", (err) => {

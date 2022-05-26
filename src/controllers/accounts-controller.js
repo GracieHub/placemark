@@ -1,5 +1,9 @@
+import bcrypt from "bcrypt"; // added for security assignment
 import { UserSpec, UserCredentialsSpec } from "../models/joi-schemas.js";
 import { db } from "../models/db.js";
+
+const saltRounds = 10; // added for security assignment
+
 
 export const accountsController = {
   index: {
@@ -25,6 +29,7 @@ export const accountsController = {
     },
     handler: async function (request, h) {
       const user = request.payload;
+      user.password = await bcrypt.hash(user.password, saltRounds);  // added for security assignment
       await db.userStore.addUser(user);
       return h.redirect("/");
     },
@@ -47,9 +52,14 @@ export const accountsController = {
     handler: async function (request, h) {
       const { email, password } = request.payload;
       const user = await db.userStore.getUserByEmail(email);
-      if (!user || user.password !== password) {
+      const passwordsMatch = await bcrypt.compare(password, user.password); // added for security assignment
+      if (!user || !passwordsMatch) {              // edited for security asssignment
         return h.redirect("/");
       }
+//      if (user.email === "homer@simpson.com" && user.password === "secret") {
+//        request.cookieAuth.set({ id: user._id });
+//        return h.redirect("/admin");
+//      }
       request.cookieAuth.set({ id: user._id });
       return h.redirect("/dashboard");
     },
@@ -68,4 +78,11 @@ export const accountsController = {
     }
     return { valid: true, credentials: user };
   },
+  showAdmin: {
+    auth: false,
+    handler: function (request, h) {
+      return h.view("admin", { title: "Admin for GeoSurf" });
+    },
+  },
+
 };

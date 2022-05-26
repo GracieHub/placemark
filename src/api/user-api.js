@@ -1,9 +1,11 @@
 import Boom from "@hapi/boom";
+import bcrypt from "bcrypt"; // added for security assignment
 import { db } from "../models/db.js";
 import { UserCredentialsSpec, UserSpec, UserSpecPlus, IdSpec, UserArray, JwtAuth } from "../models/joi-schemas.js";
 import { validationError } from "./logger.js";
 import { createToken } from "./jwt-utils.js";
 
+const saltRounds = 10; // added for security assignment
 
 export const userApi = {
   find: {
@@ -50,14 +52,16 @@ export const userApi = {
     auth: false,
     handler: async function (request, h) {
       try {
-        const user = await db.userStore.addUser(request.payload);
+        const user = request.payload;
+        user.password = await bcrypt.hash(user.password, saltRounds);  // added for security assignment
+        await db.userStore.addUser(request.payload);
         if (user) {
           return h.response(user).code(201);
         }
         return Boom.badImplementation("error creating user");
       } catch (err) {
         return Boom.serverUnavailable("Database Error");
-      }
+      } 
     },
     tags: ["api"],
     description: "Create a User",
@@ -87,15 +91,18 @@ export const userApi = {
     auth: false,
     handler: async function(request, h) {
       try {
-        const user = await db.userStore.getUserByEmail(request.payload.email);
+        const {password} = request.payload;
+        const user = await db.userStore.getUserByEmail(request.payload.email);  
+        const passwordsMatch = await bcrypt.compare(password, user.password); // added for security assignment
+        
         if (!user) {
           return Boom.unauthorized("User not found");
-        } else if (user.password !== request.payload.password) {
+        } if (!user || !passwordsMatch) {
           return Boom.unauthorized("Invalid password");
-        } else {
+        } 
           const token = createToken(user);
           return h.response({ success: true, token: token }).code(201);
-        }
+        
       } catch (err) {
         return Boom.serverUnavailable("Database Error");
       }
