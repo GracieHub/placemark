@@ -94,7 +94,6 @@ export const userApi = {
         const {password} = request.payload;
         const user = await db.userStore.getUserByEmail(request.payload.email);  
         const passwordsMatch = await bcrypt.compare(password, user.password); // added for security assignment
-        
         if (!user) {
           return Boom.unauthorized("User not found");
         } if (!user || !passwordsMatch) {
@@ -103,8 +102,8 @@ export const userApi = {
           const token = createToken(user);
           return h.response({ success: true, token: token }).code(201);
         
-      } catch (err) {
-        return Boom.serverUnavailable("Database Error");
+        } catch (err) {
+          return Boom.serverUnavailable("Database Error");
       }
     },
     tags: ["api"],

@@ -17,8 +17,6 @@ import { apiRoutes } from "./api-routes.js";
 import { validate } from "./api/jwt-utils.js";
 // import { fstat } from "fs";
 
-
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
