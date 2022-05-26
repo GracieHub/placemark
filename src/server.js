@@ -45,7 +45,8 @@ const swaggerOptions = {
 
 async function init() {
   const server = Hapi.server({
-    port: process.env.PORT || 3000,
+    port: process.env.PORT || 4000,
+    routes: { cors: true },
 //    tls: {
 //      key: fs.readFileSync("/Users/grace/GithubRemote/src/keys/webserver.key"),
 //      cert: fs.readFileSync("/Users/grace/GithubRemote/src/keys/webserver.crt")
@@ -104,12 +105,12 @@ async function init() {
   server.route(webRoutes);
   server.route(apiRoutes);
   await server.start();
-  console.log("Server running on %s", server.info.uri);
+  console.log(`Server running at: ${server.info.uri}`);
 }
 
 process.on("unhandledRejection", (err) => {
   console.log(err);
-//  process.exit(1);
+  process.exit(1);
 });
 
 init();

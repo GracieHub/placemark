@@ -4,6 +4,7 @@ import { db } from "../models/db.js";
 
 const saltRounds = 10; // added for security assignment
 
+
 export const accountsController = {
   index: {
     auth: false,
