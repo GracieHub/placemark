@@ -1,6 +1,7 @@
 import Boom from "@hapi/boom";
 import { db } from "../models/db.js";
 import { IdSpec, SurfspotSpec, SurfspotSpecPlus, SurfspotArraySpec } from "../models/joi-schemas.js";
+import { Surfspot } from "../models/mongo/surfspot.js";
 import { validationError } from "./logger.js";
 
 export const surfspotApi = {
@@ -16,6 +17,7 @@ export const surfspotApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
+    
     tags: ["api"],
     response: { schema: SurfspotArraySpec, failAction: validationError },
     description: "Get all surfspotApi",
@@ -102,4 +104,54 @@ export const surfspotApi = {
     description: "Delete a surfspot",
     validate: { params: { id: IdSpec }, failAction: validationError },
   },
-};
+
+  addSurfspot: {
+    auth: {
+      strategy: "jwt",
+    },
+    handler: async function (request, h) {
+      const collection = await db.collectionStore.getCollectionById(request.params.id);
+      if (!collection) {
+        return Boom.notFound("No Collectoin with this id");
+      }
+      const surfspot = await db.surfspotStore.addSurfspot(
+        request.payload.name,
+        request.payload.latitude,
+        request.payload.longitude,
+        request.payload.typeOfWave,
+        request.auth.credentials,
+        collection,
+      );
+      return surfspot;
+    },
+  },
+
+  findByCollection: {
+    auth: {
+      strategy: "jwt",
+    },
+    handler: async function (request, h) {
+      const collectionId = request.params.id
+      try{
+        const surfspots = await db.surfspotStore.getSurfspotsByCollectionId(request.params.id);
+        console.log(request.params.id)
+        return surfspots;
+      } catch (err) {
+        return Boom.serverUnavailable("Databse Error");;
+      }
+    },
+  }, 
+
+  /* findByCollection: {
+    auth: {
+      strategy: "jwt",
+    },
+    handler: async function (request, h) {
+        const surfspots = await Surfspot.find({collectionid: request.params.id })
+        return surfspots;
+//      } catch (err) {
+//        return Boom.serverUnavailable("Databse Error");;
+      },
+    }, */
+  
+}

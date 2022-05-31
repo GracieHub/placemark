@@ -1,6 +1,4 @@
 import { Surfspot } from "./surfspot.js";
-import { Collection } from "./collection.js";
-
 
 export const surfspotMongoStore = {
   async getAllSurfspots() {
@@ -8,12 +6,26 @@ export const surfspotMongoStore = {
     return surfspots;
   },
 
-  async addSurfspot(collectionId, surfspot) {
+ /* async addSurfspot(collectionId, surfspot) {
     surfspot.collectionid = collectionId;
     const newSurfspot = new Surfspot(surfspot);
     const surfspotObj = await newSurfspot.save();
     return this.getSurfspotById(surfspotObj._id);
   },
+*/
+
+async addSurfspot(name, latitude, longitude, typeOfWave, collection) {
+  const newSurfspot = new Surfspot({
+    name,
+    latitude,
+    longitude,
+    typeOfWave,
+    collection: collection._id,
+  });
+  await newSurfspot.save();
+  return newSurfspot;
+},
+
 
   async getSurfspotsByCollectionId(id) {
     const surfspots = await Surfspot.find({ collectionid: id }).lean();

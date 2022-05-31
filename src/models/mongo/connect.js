@@ -3,6 +3,9 @@ import * as dotenv from "dotenv";
 import Mongoose from "mongoose";
 import * as mongooseSeeder from "mais-mongoose-seeder";
 import { seedData } from "./seed-data.js";
+// import {Collection} from "./collection.js"
+// import {Surfspot} from "./surfspot.js"
+
 
 dotenv.config();
 

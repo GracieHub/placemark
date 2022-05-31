@@ -30,6 +30,10 @@ export const seedData = {
     waterford: {
       title: "Waterford Surf Spots",
       userid: "->users.homer"
+    },
+    kerry: {
+      title: "Kerry Surf Spots",
+      userid: "->users.marge"
     }
   },
   surfspots: {
@@ -54,6 +58,13 @@ export const seedData = {
       longitude: 7.2719,
       typeOfWave: "Advanced only Reef Break",
       collectionid: "->collections.waterford"
+    },
+    surfspot_4 : {
+      name: "Castlegregory",
+      latitude: 52.1406,
+      longitude: 7.2719,
+      typeOfWave: "Beginner Beach Break",
+      collectionid: "->collections.kerry"
     },
   }
 };

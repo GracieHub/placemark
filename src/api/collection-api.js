@@ -104,4 +104,7 @@ export const collectionApi = {
   },
   tags: ["api"],
   description: "Delete all CollectionApi",
+
+
+
 };

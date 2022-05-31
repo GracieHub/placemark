@@ -89,27 +89,29 @@ export const userApi = {
 
   authenticate: {
     auth: false,
-    handler: async function(request, h) {
+    handler: async function (request, h) {
       try {
         const {password} = request.payload;
-        const user = await db.userStore.getUserByEmail(request.payload.email);  
-        const passwordsMatch = await bcrypt.compare(password, user.password); // added for security assignment
+        const user = await db.userStore.getUserByEmail(request.payload.email);
+        const passwordsMatch = await bcrypt.compare(password, user.password);
         if (!user) {
           return Boom.unauthorized("User not found");
         } if (!user || !passwordsMatch) {
           return Boom.unauthorized("Invalid password");
-        } 
-          const token = createToken(user);
-          return h.response({ success: true, token: token }).code(201);
-        
-        } catch (err) {
-          return Boom.serverUnavailable("Database Error");
+        }
+        const token = createToken(user);
+        return h.response({ success: true, token: token }).code(201);
+      } catch (err) {
+        return Boom.serverUnavailable("Database Error");
       }
     },
-    tags: ["api"],
+  },
+}
+/*    tags: ["api"],
     description: "Authenticate  a User",
     notes: "If user has valid email/password, create and return a JWT token",
     validate: { payload: UserCredentialsSpec, failAction: validationError },
     response: { schema: JwtAuth, failAction: validationError }
   }
-};
+}; 
+*/

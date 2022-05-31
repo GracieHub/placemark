@@ -35,4 +35,14 @@ export const surfspotController = {
       return h.redirect(`/collection/${request.params.id}`);
     },
   },
+
+  report: {
+    handler: async function (request, h) {
+      const surfspots = await db.surfspotStore.getAllSurfspots();
+      return h.view("Report", {
+        title: "Surfspots to Date",
+        surfspots: surfspots,
+      });
+    },
+  },
 };
