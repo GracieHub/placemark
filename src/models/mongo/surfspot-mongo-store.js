@@ -6,15 +6,15 @@ export const surfspotMongoStore = {
     return surfspots;
   },
 
- /* async addSurfspot(collectionId, surfspot) {
+  async addSurfspot(collectionId, surfspot) {
     surfspot.collectionid = collectionId;
     const newSurfspot = new Surfspot(surfspot);
     const surfspotObj = await newSurfspot.save();
     return this.getSurfspotById(surfspotObj._id);
   },
-*/
 
-async addSurfspot(name, latitude, longitude, typeOfWave, collection) {
+
+/* async addSurfspot(name, latitude, longitude, typeOfWave, collection) {
   const newSurfspot = new Surfspot({
     name,
     latitude,
@@ -24,7 +24,7 @@ async addSurfspot(name, latitude, longitude, typeOfWave, collection) {
   });
   await newSurfspot.save();
   return newSurfspot;
-},
+}, */
 
 
   async getSurfspotsByCollectionId(id) {

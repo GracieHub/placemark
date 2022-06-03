@@ -2,6 +2,7 @@ import Boom from "@hapi/boom";
 import { CollectionSpec, CollectionSpecPlus, CollectionArraySpec, IdSpec } from "../models/joi-schemas.js";
 import { db } from "../models/db.js";
 import { validationError } from "./logger.js";
+import { Collection } from "../models/mongo/collection.js";
 
 
 export const collectionApi = {
@@ -23,7 +24,7 @@ export const collectionApi = {
         notes: "Returns all collections",
       },
 
-  findOne: {
+/*  findOne: {
     auth: {
           strategy: "jwt",
         },
@@ -43,7 +44,25 @@ export const collectionApi = {
     notes: "Returns a Collection",
     validate: { params: { id: IdSpec }, failAction: validationError },
     response: { schema: CollectionSpecPlus, failAction: validationError },
+  }, */
+
+  findOne: {            // for svelte assignment
+    auth: {
+          strategy: "jwt",
+        },
+        handler: async function (request, h) {
+      try {
+        const collection = await Collection.findOne({ _id: request.params.id });
+        if (!collection) {
+          return Boom.notFound("No collection with this id");
+        }
+        return collection;
+      } catch (err) {
+        return Boom.serverUnavailable("No collection with this id");
+      }
+    },
   },
+
 
   create: {
     auth: {

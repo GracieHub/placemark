@@ -110,9 +110,30 @@ export const surfspotApi = {
       strategy: "jwt",
     },
     handler: async function (request, h) {
+      try {
+        const surfspot = await db.surfspotStore.addSurfspot(request.params.id, request.payload);
+        if (surfspot) {
+          return h.response(surfspot).code(201);
+        }
+        return Boom.badImplementation("error creating placemark");
+      } catch (err) {
+        return Boom.serverUnavailable("Database Error");
+      }
+    },
+  },
+
+ 
+ 
+ 
+
+    /*   auth: {
+      strategy: "jwt",
+    },
+    handler: async function (request, h) {
       const collection = await db.collectionStore.getCollectionById(request.params.id);
+      console.log(`test create surfspot${request.params.id}`)
       if (!collection) {
-        return Boom.notFound("No Collectoin with this id");
+        return Boom.notFound("No Collection with this id");
       }
       const surfspot = await db.surfspotStore.addSurfspot(
         request.payload.name,
@@ -124,7 +145,7 @@ export const surfspotApi = {
       );
       return surfspot;
     },
-  },
+  }, */
 
   findByCollection: {
     auth: {
@@ -142,16 +163,4 @@ export const surfspotApi = {
     },
   }, 
 
-  /* findByCollection: {
-    auth: {
-      strategy: "jwt",
-    },
-    handler: async function (request, h) {
-        const surfspots = await Surfspot.find({collectionid: request.params.id })
-        return surfspots;
-//      } catch (err) {
-//        return Boom.serverUnavailable("Databse Error");;
-      },
-    }, */
-  
 }

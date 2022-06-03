@@ -9,7 +9,7 @@ export const collectionMongoStore = {
 
   async getCollectionById(id) {
     if (id) {
-      const collection = await Collection.findOne({ _id: id }).lean();
+      const collection = await Collection.findOne({ _id: id });
       if (collection) {
         collection.surfspots = await surfspotMongoStore.getSurfspotsByCollectionId(collection._id);
       }
